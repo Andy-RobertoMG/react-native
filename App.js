@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -6,10 +7,10 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import type {Node} from 'react';
-import styled from 'styled-components';
+
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import {
   SafeAreaView,
@@ -29,39 +30,17 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-
-const Section = ({children, title}): Node => {
-
-  
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
 const App = () => {
-  const botton = styled.button`
-    background-color: red;
-  `;
+  const [citas, setCitas] = useState([
+    {id:"1",paciente: "Hook", propietario:'Juan', sintomas: "No come"},
+    {
+      id:"2",paciente: "Redux", propietario:'Juan', sintomas: "No come"
+    },
+    {
+      id:"3" ,paciente: "Native", propietario:'Juan', sintomas: "No come"
+    }
+  ])
+
   const Estilos = StyleSheet.create({
     encabezado: {
       textAlign: 'center',
@@ -79,8 +58,23 @@ const App = () => {
 
   return (
     <>
-      <Text style={Estilos.encabezado}>hsdeeerr </Text>
-      <botton> boton</botton>
+      <View>
+        <Text style={Estilos.encabezado}>hsdeeerr </Text>
+      </View>
+      
+        <View>
+          {citas.map(cita =>(
+            <Text>{cita.paciente}</Text>
+          ))}
+        </View>
+        <View>
+          {
+            citas.map(cita =>{
+              return <Text>{cita.paciente}</Text>
+            })
+          }
+        </View>
+  
     </>
   );
 };
