@@ -20,6 +20,7 @@ import {
   Text,
   useColorScheme,
   View,
+  FlatList,
 } from 'react-native';
 
 import {
@@ -60,20 +61,29 @@ const App = () => {
     <>
       <View>
         <Text style={Estilos.encabezado}>hsdeeerr </Text>
+        <FlatList 
+          data={citas} 
+          renderItem={({item})=>(
+            <View>
+              <Text>{item.paciente}</Text>
+            </View>
+            )}
+            keyExtractor={cita => cita.id}
+            key={cita => cita.id}
+          />
       </View>
-      
         <View>
-          {citas.map(cita =>(
-            <Text>{cita.paciente}</Text>
+          {citas.map(cita =>(//Pide que utilices un key
+            <Text key={cita.id}>{cita.paciente}</Text>
           ))}
         </View>
-        <View>
+        {/* <View>
           {
             citas.map(cita =>{
               return <Text>{cita.paciente}</Text>
             })
           }
-        </View>
+        </View> */}
   
     </>
   );
