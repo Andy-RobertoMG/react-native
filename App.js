@@ -8,8 +8,8 @@
  */
 
 import React, { useState } from 'react';
-
-import type {Node} from 'react';
+import Cita from './components/citas'
+import {Component} from 'react';
 
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import {
@@ -44,12 +44,17 @@ const App = () => {
 
   const Estilos = StyleSheet.create({
     encabezado: {
+      display: 'flex',
+      alignItems:'center',
       textAlign: 'center',
-      padding: scale(10),
+      justifyContent: 'space-around',
       height: 40,
       with: '100%',
       backgroundColor: 'hsla(223, 53%, 18%, 1)',
     },
+    alineacion:{
+      padding: scale(10),
+    }
   });
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -60,16 +65,16 @@ const App = () => {
   return (
     <>
       <View>
-        <Text style={Estilos.encabezado}>hsdeeerr </Text>
+        <View style={Estilos.encabezado}>
+          <Text style={Estilos.alineacion}>hsdeeerr </Text>
+          <Text style={Estilos.alineacion}>hsdeeerr </Text>
+          <Text style={Estilos.alineacion}>hsdeeerr </Text>
+        </View>
         <FlatList 
           data={citas} 
-          renderItem={({item})=>(
-            <View>
-              <Text>{item.paciente}</Text>
-            </View>
-            )}
+          renderItem={({item})=> <Cita prueba={item}/>}//Retorna un arreglo de Views y las inserta;
             keyExtractor={cita => cita.id}
-            key={cita => cita.id}
+
           />
       </View>
         <View>
@@ -77,6 +82,11 @@ const App = () => {
             <Text key={cita.id}>{cita.paciente}</Text>
           ))}
         </View>
+        {/* <View>//Esto necesita una key tambien
+          {
+            [<Text>1</Text>,<Text>2</Text>,<Text>3</Text>]//Esto es lo que retorna map un arreglo.
+          }
+        </View> */}
         {/* <View>
           {
             citas.map(cita =>{
